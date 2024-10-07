@@ -1,0 +1,86 @@
+# примеры API-запросов
+
+@baseUrl = http://localhost:8000/api
+
+# получение объявлений
+GET {{baseUrl}}/advertisements/
+Content-Type: application/json
+
+###
+
+# создание объявления
+POST {{baseUrl}}/advertisements/
+Content-Type: application/json
+Authorization: Token 2774382129fe7afcb04a1b24dcca93367dd88155
+
+{
+  "title": "Шкаф IKEA",
+  "description": "Срочно"
+}
+###
+
+# создание объявления
+POST {{baseUrl}}/advertisements/
+Content-Type: application/json
+Authorization: Token 2774382129fe7afcb04a1b24dcca93367dd88155
+
+{
+  "title": "ipone даром",
+  "description": "Срочно"
+}
+###
+
+# попытка поменять объявление
+PATCH {{baseUrl}}/advertisements/2/
+Content-Type: application/json
+Authorization: Token 2774382129fe7afcb04a1b24dcca93367dd88155
+
+{
+  "status": "CLOSED"
+}
+
+###
+
+# фильтрация по создателю
+GET {{baseUrl}}/advertisements/?creator=2
+Content-Type: application/json
+
+###
+
+# фильтрация по дате
+GET {{baseUrl}}/advertisements/?created_at_before=2020-10-01
+Content-Type: application/json
+
+
+###
+
+# получение объявлений (авторизованный пользователь)
+GET {{baseUrl}}/advertisements/
+Content-Type: application/json
+Authorization: Token 2294079e89b3434cfadf480f3c1217dc34768e7b
+
+### 
+
+# создание объявления, если у пользователя уже 10 открытых объявлений
+POST {{baseUrl}}/advertisements/
+Content-Type: application/json
+Authorization: Token 2774382129fe7afcb04a1b24dcca93367dd88155
+
+{
+  "title": "Новый шкаф IKEA",
+  "description": "Срочно",
+  "status": "OPEN"
+}
+
+###
+
+# получение объявлений (неавторизованный пользователь)
+GET {{baseUrl}}/advertisements/
+Content-Type: application/json
+
+###
+
+# удаление чужого объявления
+DELETE {{baseUrl}}/advertisements/2/
+Content-Type: application/json
+Authorization: Token 2294079e89b3434cfadf480f3c1217dc34768e7b
